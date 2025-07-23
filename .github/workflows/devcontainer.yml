@@ -1,0 +1,26 @@
+name: DevContainer
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/devcontainer.yml'
+  workflow_dispatch:
+
+jobs:
+  build-devcontainer:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build & Push
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainer
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
+          push: always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

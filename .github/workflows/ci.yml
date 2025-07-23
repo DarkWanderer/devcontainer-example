@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,3 +18,4 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           runCmd: cargo test
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer

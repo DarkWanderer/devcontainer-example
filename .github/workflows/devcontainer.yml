@@ -8,6 +8,10 @@ on:
       - '.github/workflows/devcontainer.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-devcontainer:
     name: Build
@@ -19,6 +23,13 @@ jobs:
       - name: Set lowercase repository name
         id: lowercase
         run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push
         uses: devcontainers/ci@v0.3

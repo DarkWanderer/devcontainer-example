@@ -16,11 +16,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set lowercase repository name
+        id: lowercase
+        run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Build & Push
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/${{ github.repository }}/devcontainer
-          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
+          imageName: ghcr.io/${{ steps.lowercase.outputs.repo }}/devcontainer
+          cacheFrom: ghcr.io/${{ steps.lowercase.outputs.repo }}/devcontainer
           push: always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -14,8 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set lowercase repository name
+        id: lowercase
+        run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Run tests in dev container
         uses: devcontainers/ci@v0.3
         with:
           runCmd: cargo test
-          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
+          cacheFrom: ghcr.io/${{ steps.lowercase.outputs.repo }}/devcontainer

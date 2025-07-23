@@ -2,10 +2,11 @@ fn main() {
     println!("Hello, world!");
 }
 
+#[cfg(test)]
 fn add(a: i32, b: i32) -> i32 {
     a + b
 }
-  
+
 #[cfg(test)]
 mod tests {
     use super::*;

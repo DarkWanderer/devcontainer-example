@@ -1,8 +1,11 @@
 {
   "permissions": {
     "allow": [
+      "Bash(cargo:*)",
       "Bash(mkdir:*)"
     ],
-    "deny": []
+    "deny": [
+      "Bash(sudo:*)"
+    ]
   }
 }

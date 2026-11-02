@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
 	"name": "Rust+Claude",
-	"image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/rust:2-1-bullseye",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	//"build": {
 	//	"dockerfile": "Dockerfile"
